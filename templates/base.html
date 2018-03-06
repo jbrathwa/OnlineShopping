@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.css' %}">
+    <script src="bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'bootstrap/js/holder.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>{% block title %}Home{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar navbar-inverse ">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Yolo Shopping</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+             <!-- <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>-->
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Men</a></li>
+                  <li><a href="#">Women</a></li>
+                  <li><a href="#">Kids</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header"></li>
+                  <li><a href="#">Electronics</a></li>
+                  <li><a href="#">Home Appliances</a></li>
+                  <li><a href="#">Books</a></li>
+                </ul>
+              </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" data-toggle="modal" data-target="#signupWindow"><span class="glyphicon glyphicon-user"></span>{{user_name}}</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span><span class="badge">{{total_items}}</span></a></li>
+                <li><a href="{% url 'logout' %}">logout</a></li>
+            </ul>
+              <div class="col-sm-3 col-md-3 right">
+        <form class="navbar-form" action="#" role="search">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term" style="width:500px">
+        </div>
+        </form>
+        </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+
+{% block body %}{% endblock %}
+</body>
+</html>
