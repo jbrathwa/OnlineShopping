@@ -1,0 +1,31 @@
+
+<div class="col-sm-2">
+{% if CATEGORIES %}
+<div class="panel panel-primary">
+    <div class="panel-heading"><h4 class="panel-title">Shop by category</h4></div>
+</div>
+{% endif %}
+<div class="panel-group" id="accordion">
+ {% for category in CATEGORIES %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#{{category}}">{{category}}</a>
+      </h4>
+    </div>
+    <div id="{{category}}" class="panel-collapse collapse out">
+      <div class="panel-body">
+            <h5 class="panel-title"><a href="{% url 'category' category_id=category.pk %}">{{category}}</a> </h5>
+            {% for cat,subcat in SUBCATEGORIES.items %}
+                {% ifequal category cat %}
+                    {% for item in subcat %}
+                    <a href="{% url 'subcategory' category_id=cat.pk subcategory_id=item.pk %}" >{{item}}</a><br>
+                    {% endfor %}
+                {% endifequal %}
+            {% endfor %}
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+</div>

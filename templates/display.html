@@ -1,0 +1,22 @@
+{% extends 'base_visitor.html' %}
+{% load static %}
+{% block body %}
+<div class="col-md-8">
+    <div class="alert alert-success">Total {{products|length}} products found</div>
+    <div class="row">
+    {% for product in products %}
+        <div class="col-md-4">
+                <div class="thumbnail">
+                    <a href="#"></a>
+                <img src="{% static 'bootstrap/js/holder.js/300x200' %}" alt="img" >
+                <div class="caption">
+                    <h4>{{product.product_name}}</h4><br>
+                    <p>{{product.price}}</p><br>
+                    <button type="button"class="btn btn-xs btn-primary pull-right">Add to Cart</button>
+                </div>
+                </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
