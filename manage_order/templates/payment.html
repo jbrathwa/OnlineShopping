@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="col-md-8">
+        <h1 style="text-align:center">Express Checkout</h1>
+             <div class="panel panel-default">
+                <div class="panel-heading">
+                <h2 class="panel-title">Payment Information</h2>
+                </div>
+                <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-5">
+                    <h4>Total Amount:{{amount}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                    <h4>Select Payment Method:</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                    <input type="radio" name="method" value="cod" > Cash On Delivery
+                    </div>
+                    <div class="col-md-4">
+                    <input type="radio" name="method" value="net"> Net Banking
+                    </div>
+                    <div class="col-md-4">
+                    <input type="radio" name="method" value="credit" checked> Credit/Debit Card
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-5">
+                    </div>   
+                </div>
+                 <div class="row">
+                    <div class="col-md-5">
+                   
+                    </div>
+                </div>         
+
+                </div>
+                </div>
+             </div>
+      <div class="container">
+             <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Card Details
+                    </h3>
+                    
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group">
+                        <label>
+                            Name On Card</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="name" placeholder="Name On Card"
+                                required autofocus />
+    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber">
+                            CARD NUMBER</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
+                                required autofocus />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-7 col-md-7">
+                            <div class="form-group">
+                                <label for="expityMonth">
+                                    EXPIRY DATE</label>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                </div>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-md-5 pull-right">
+                            <div class="form-group">
+                                <label for="cvCode">
+                                    CVV</label>
+                                <input type="password" class="form-control" id="cvCode" placeholder="CVV" required />
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+             <div class="modal-footer">
+                <div class="row">
+            
+               <div class="col-md-5">
+              <button class="btn  btn-md btn-primary pull-right">Place Order</button>
+            </div>
+            </div>
+            </div>
+            
+        </div>
+    </div>
+      </div>
+        </div>
+{% endblock %}s
