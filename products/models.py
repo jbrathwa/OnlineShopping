@@ -21,11 +21,17 @@ class Products(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
     subcategory=models.ForeignKey(SubCategory,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.product_name
 
 
 class Brand(models.Model):
-    pass
+    name=models.CharField(max_length=20,default='brand')
+
 
 class Reviews(models.Model):
-    pass
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    review=models.TextField(max_length=500)
+
 

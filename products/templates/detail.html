@@ -1,0 +1,34 @@
+{% extends base_page %}
+{% block body %}
+<div class="col-md-8">
+<div class="jumbotron">
+    <div class="row">
+    <div class="col-md-6">
+        <div class="thumbnail">
+            <img data-src="holder.js/350x300?random=yes&text={{product.product_name}}" alt="img">
+        </div>
+    </div>
+        <div class="col-md-6"><h2>Product Info</h2><br>
+            <strong>Product Name:</strong><p>{{product.product_name}}</p><br>
+            <strong>Price:</strong><p>{{product.price}}</p><br>
+            <strong>Ratings:</strong><p>{{rating}}</p><br>
+            <button id="cart{{product.pk}}" onclick="cart(this,event)"class="btn btn-sm btn-warning">Add to cart</button>
+        </div>
+    </div>
+</div>
+    <div class="jumbotron">
+        <h2>Detail</h2>
+        <p>{{product.detail}}</p>
+    </div>
+
+    {% if reviews %}
+    <h3>Product Reviews</h3>
+    {% for review in reviews %}
+    <div class="panel panel-default">
+        <div class="panel-heading"><div class="panel-title">Rating:{{review.rating}}</div></div>
+        <div class="panel-body">{{review.review}}</div>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

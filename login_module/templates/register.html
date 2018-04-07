@@ -1,4 +1,32 @@
 {% extends 'base_visitor.html' %}
-{% block signup %}
-
+{% block body %}
+{% if success %}
+    <div class="alert alert-success">You are registered successfully. Login to continue</div>
+{% endif %}
+<div class="col-md-5">
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="panel-title">Sign Up</h2>
+    </div>
+    <div class="panel-body">
+    <form role="form" action="{% url 'signup' %}" method="POST">{% csrf_token %}
+                 <div class="form-group">
+                  <input type="text" name="username" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control" placeholder="Password">
+                </div>
+                <div class="form-group">
+                  <input type="password" name="rpassword" class="form-control" placeholder="Confirm Password">
+                </div>
+                 <div class="form-group">
+                  <input type="submit" class="btn btn-sm btn-primary" value="sign up">
+                </div>
+    </form>
+    </div>
+    </div>
+</div>
 {% endblock %}

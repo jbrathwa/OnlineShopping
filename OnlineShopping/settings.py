@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'login_module.apps.LoginConfig',
     'products.apps.ProductsConfig',
+    'user.apps.UserConfig',
+    'manage_order.apps.ManageOrderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,6 +65,9 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'products.context.category',
+                'home.context.setPage',
+                'home.context.searchform',
+                'user.context.user_info',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',

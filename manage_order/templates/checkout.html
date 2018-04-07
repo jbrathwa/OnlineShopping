@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="col-md-8">
+    <div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Order Summary</h3>
+            </div>
+
+            <div class="panel-body">
+                {% for item in cart %}
+                <div  class="row">
+                    {% for key,val in item.items %}
+                    <div class="col-md-2">{{val}}</div>
+                    {% endfor %}
+                </div>
+                <br>
+                {% endfor %}
+                <div>
+                <div class="col-md-2"><strong>Total</strong>&nbsp;{{total}}</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div>
+    <div class="row">
+
+    </div>
+    <div class="row">
+    <div class="col-md-12">
+    <ul class="nav nav-tabs" role="tablist">
+        <li id="ship" role="presentation" class=""><a  href="#shipping">Shiping Information</a></li>
+    </ul>
+        <div class="row" id="shipping">
+                &nbsp;<h3>Shipping</h3>
+                <div class="col-md-6">
+                <div class="modal-body">
+              <form role="form" method="post" action="{% url 'make_order' %}">{% csrf_token %}
+                  <div class="row">
+                 <div class="col-md-6">
+                 <div class="form-group">
+                  First Name:<input type="text" name="firstname" class="form-control" placeholder="First Name">
+                </div>
+                 </div>
+                 <div class="col-md-6">
+                 <div class="form-group">
+                  Last Name:<input type="text" name="lastname" class="form-control" placeholder="Last Name">
+                </div>
+                 </div>
+                  </div>
+                <div class="row">
+                 <div class="col-md-8">
+                 <div class="form-group">
+                  Email:<input type="text" name="email" class="form-control" placeholder="Email">
+                </div>
+                 </div>
+                 <div class="col-md-8">
+                 <div class="form-group">
+                  Phone:<input type="text" name="phone" class="form-control" placeholder="Phone">
+                </div>
+                 </div>
+                  </div>
+                 <div class="row">
+                 <div class="col-md-8">
+                 <div class="form-group">
+                  Address:<input type="text" name="addone" class="form-control" placeholder="Street/City">
+                </div>
+                 </div>
+                 </div>
+                 <div class="row">
+                 <div class="col-md-8">
+                 <div class="form-group">
+                          <input type="text" name="addtwo" class="form-control" placeholder="State">
+                </div>
+                 </div>
+                  </div>
+                <div class="row">
+                        <div class="form-group">
+                          <input type="submit" class="btn btn-sm btn-primary" value="proceed to payment">
+                </div>
+                </div>
+
+              </form>
+            </div>
+                </div>
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

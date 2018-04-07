@@ -1,18 +1,10 @@
 from django.shortcuts import render_to_response,render
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
-from django.http import HttpResponseRedirect
-from django.template.context_processors import csrf
-from django.views import generic
-from .models import Category,SubCategory,Products
+from .models import Category,SubCategory,Products,Reviews
 from .forms import ProductForm
+from django.db.models import Q
 
-#class ProductListView(generic.ListView):
-#	    model = Products
-
-
-#@login_required(login_url = "{% url 'login_user' %}")
-
+@login_required(login_url = "{% url 'login_user' %}")
 def add_product(request):
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -52,3 +44,29 @@ def bySubCategory(request,category_id,subcategory_id):
         "products":products
     }
     return render(request, "display.html", context)
+
+def search(request):
+    query=request.GET.get('query')
+    print(query)
+    products =Products.objects.filter(Q(subcategory__sub_category__istartswith=query)
+                                      |Q(category__category__iregex=query)
+                                      |Q(subcategory__sub_category__iregex=query)
+                                      |Q(product_name__icontains=query)
+                                      |Q(product_name__istartswith=query)
+                                      |Q(product_name__iregex=query))
+    print(products)
+    context={"products":products,"search":True}
+    return render(request,"display.html",context)
+
+
+def product(request,product_id):
+    product = Products.objects.get(pk=product_id)
+    reviews=Reviews.objects.filter(product=product_id)
+    if  len(reviews) != 0:
+        rating=0
+        for r in reviews:
+            rating=rating+r.rating
+        rating=rating/len(reviews)
+    else:
+        rating='No Ratings'
+    return render(request,'detail.html',{"product":product,"reviews":reviews,"rating":rating})

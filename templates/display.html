@@ -1,19 +1,24 @@
-{% extends 'base_visitor.html' %}
+{% extends base_page %}
 {% load static %}
 {% block body %}
+
 <div class="col-md-8">
     <div class="alert alert-success">Total {{products|length}} products found</div>
     <div class="row">
     {% for product in products %}
         <div class="col-md-4">
-                <div class="thumbnail">
-                    <a href="#"></a>
-                <img src="{% static 'bootstrap/js/holder.js/300x200' %}" alt="img" >
-                <div class="caption">
-                    <h4>{{product.product_name}}</h4><br>
-                    <p>{{product.price}}</p><br>
-                    <button type="button"class="btn btn-xs btn-primary pull-right">Add to Cart</button>
-                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <a href="{% url 'product' product.pk %}">
+                        <div class="thumbnail">
+                            <img data-src="holder.js/300x200?random=yes" alt="img">
+                        </div>
+                        </a>
+                        <h4>{{product.product_name}}</h4>
+                        <p>{{product.price}}</p>
+                        <button id="cart{{product.pk}}" onclick="cart(this,event)" class="btn btn-link pull-right"><i class="material-icons">shopping_cart</i></button>
+                        <button onclick="wishlist(this, event)"  id="wish{{product.pk}}" class="btn btn-link pull-right"><i class="material-icons">favorite_border</i></button>
+                    </div>
                 </div>
         </div>
     {% endfor %}

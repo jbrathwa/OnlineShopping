@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+{% if products %}
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Your wishlist</h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6"><b>Item</b></div>
+                    <div class="col-md-2"><b>Price</b></div>
+                    <div class="col-md-2"><b>Add to cart</b></div>
+                    <div class="col-md-2"><b>Remove</b></div>
+                </div>
+                <br>
+                {% for product in products %}
+                <div id="{{product.pk}}" class="row">
+                     <div class="col-md-6">
+                      <p>{{product.product_name}}</p>
+                     </div>
+                     <div id="price" class="col-md-2">{{product.price}}</div>
+                    <div class="col-md-2"><button id="wish{{product.pk}}" type="button" class="btn btn-xs btn-link" onclick="cart(this,event)"><i class="material-icons">shopping_cart</i></button></div>
+                    <div class="col-md-2"><button type="button" class="btn btn-xs btn-link" onclick="removeFromWishlist(this)"><i class="material-icons">clear</i></button></div>
+                      <input type="hidden" id="product" name="{{product.pk}}" value="{{product.pk}}">
+                </div>
+                <br>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+{% else %}
+<div class="col-md-8"><div class="alert alert-info">No items in wishlist</div></div>
+{% endif %}
+{% endblock %}

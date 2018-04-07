@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     {% load staticfiles %}
-   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <script src="{% static 'bootstrap/js/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'bootstrap/js/holder.js' %}"></script>
-    <style>
-        .navbar{
-            border-radius: 0px;
-         }
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'style.css'%}">
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
@@ -25,24 +24,19 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Yolo Shopping</a>
+            <a class="navbar-brand" href="{% url 'index' %}">Yolo Shopping</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="{% url 'index' %}">Home</a></li>
              <!-- <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>-->
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Men</a></li>
-                  <li><a href="#">Women</a></li>
-                  <li><a href="#">Kids</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header"></li>
-                  <li><a href="#">Electronics</a></li>
-                  <li><a href="#">Home Appliances</a></li>
-                  <li><a href="#">Books</a></li>
+                  {% for category in CATEGORIES %}
+                  <li><a href="{% url 'category' category_id=category.pk  %}">{{category}}</a></li>
+                    {% endfor %}
                 </ul>
               </li>
 
@@ -52,8 +46,8 @@
              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp;{{request.user}}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Profile</a></li>
-                  <li><a href="#">My Wishlist</a></li>
+                  <li><a href="{% url 'profile' %}">Profile</a></li>
+                  <li><a href="{% url 'wishlist' %}">My Wishlist</a></li>
                   <li><a href="#">My Orders</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header"></li>
@@ -61,14 +55,14 @@
                   <li><a href="{% url 'logout' %}">Logout</a></li>
                 </ul>
               </li>
-            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span><span class="badge">{{total_items}}</span></a></li>
+            <li><a href="{% url 'cart' %}"><span class="glyphicon glyphicon-shopping-cart"></span><span id="cartlength" class="badge">{{total_items|default:0}}</span></a></li>
             </ul>
               <div class="col-sm-3 col-md-3 right">
-        <form class="navbar-form" role="search">
+        <form  action="{% url 'search' %}" method="get" class="navbar-form" role="search">
              <div class="input-group">
-             <input type="text" class="form-control" placeholder="products,brands and more..." style="width:450px">
+             <input type="text" id="query" name="query" class="form-control" placeholder="products,brands and more..." style="width:450px">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <button id="search" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
             </span>
 
             </div>
