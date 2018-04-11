@@ -1,0 +1,27 @@
+{% extends 'base.html '%}
+{% block body %}
+{% if orders %}
+<div class="col-md-8">
+    <h1>Your Orders</h1>
+    {% regroup orders by cart_id as order_by_cart %}
+    {% for cart_id in order_by_cart %}
+    <div class="jumbotron">
+        <h3>ID:{{cart_id.grouper}}</h3>
+        {% for order in cart_id.list %}
+        <div class="panel">
+            <div class="panel-body">
+        <div><p>Product:{{order.product}}</p></div>
+        <div><p>Price:{{order.price}}</p></div>
+        <div><p>Quantity:{{order.quantity}}</p></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="col-md-8">
+<div class="alert alert-info">No Orders</div>
+</div>
+{% endif %}
+{% endblock %}

@@ -51,6 +51,7 @@ def search(request):
     products =Products.objects.filter(Q(subcategory__sub_category__istartswith=query)
                                       |Q(category__category__iregex=query)
                                       |Q(subcategory__sub_category__iregex=query)
+                                      |Q(subcategory__sub_category__icontains=query)
                                       |Q(product_name__icontains=query)
                                       |Q(product_name__istartswith=query)
                                       |Q(product_name__iregex=query))

@@ -1,28 +1,3 @@
-function searchItem(query){
-    console.log(query);
-    $.ajax({
-        dataType:"json",
-        url:"/product/search",
-        data:{'query':query},
-        type:'GET',
-        contentType:"text/json; charset=utf-8",
-        success:function(data){
-
-        },
-        error:function(xhr,status,thrown){
-        }
-    });
-    return false;
-}
-
-/*$(document).ready(function(){
-    $("#search").click(function(){
-        var query = $("#query").val();
-        searchItem(query);
-        return false;
-    });
-    return false;
-});*/
 
 function wishlist(element, event){
     var str = element.id;
@@ -117,10 +92,61 @@ function removeFromWishlist(item){
         contentType:"text/json; charset=utf-8",
         success:function(data){
             $(this).parent().parent().remove();
+            document.location.reload();
         },
         error:function(xhr,status,thrown){
         }
     });
     document.location.reload();
+    return false;
+}
+
+$(document).ready(function(){
+    $("#new").hide();
+    $("#address").click(function(){
+        $("#new").show();
+    });
+    return false;
+});
+
+$(document).ready(function(){
+     $("#cod").hide();
+     $("#netbanking").hide();
+      $("#card").hide();
+      console.log("hii");
+    $('input[type=radio][name=payMethod]').change(function(){
+        if(this.value=='cod'){
+            $("#cod").show();
+            $("#netbanking").hide();
+            $("#card").hide();
+        }
+        else if(this.value=='net'){
+            $("#netbanking").show();
+             $("#cod").hide();
+              $("#card").hide();
+        }
+        else if(this.value=='card'){
+            $("#card").show();
+             $("#cod").hide();
+            $("#netbanking").hide();
+        }
+    });
+});
+
+
+function searchItem(query){
+    console.log(query);
+    $.ajax({
+        dataType:"json",
+        url:"/product/search",
+        data:{'query':query},
+        type:'GET',
+        contentType:"text/json; charset=utf-8",
+        success:function(data){
+
+        },
+        error:function(xhr,status,thrown){
+        }
+    });
     return false;
 }

@@ -5,7 +5,8 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from products.models import Products
 from django.template.context_processors import csrf
-from .models import Profile
+from .models import Profile,Cart
+import random
 from django.contrib.auth.models import User
 @login_required()
 def add_to_wishlist(request):
@@ -110,10 +111,28 @@ def updateProfile(request):
     user.save()
 
     profile=Profile.objects.get(user=request.user)
-    profile.address_one=addone
-    profile.address_two=addtwo
-    profile.phone=phone
-    profile.save()
+    if not profile:
+        profile=Profile(user=request.user,phone=phone,address_one=addone,address_two=addtwo)
+        profile.save()
+    else:
+        profile.address_one=addone
+        profile.address_two=addtwo
+        profile.phone=phone
+        profile.save()
 
     return render(request,'profile.html',{"profile":profile,"user":request.user,"success":True})
 
+
+def my_orders(request):
+    cart = Cart.objects.filter(user=request.user)
+    orders=[]
+    for item in cart:
+        order={}
+        p=Products.objects.get(pk=item.product.pk)
+        order['product']=p.product_name
+        order['cart_id']=item.cart_id
+        order['quantity']=item.quantity
+        order['price']=p.price
+        orders.append(order)
+
+    return render(request,'orders.html',{'orders':orders})

@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^wishlist/remove',views.remove_from_wishlist,name="removelist"),
     url(r'^profile$',views.profile,name="profile"),
     url(r'^updateprofile$',views.updateProfile,name="update_profile"),
+    url(r'^orders',views.my_orders,name="my_orders")
 ]

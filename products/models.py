@@ -27,6 +27,11 @@ class Products(models.Model):
 
 class Brand(models.Model):
     name=models.CharField(max_length=20,default='brand')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Reviews(models.Model):

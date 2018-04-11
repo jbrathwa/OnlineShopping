@@ -12,3 +12,8 @@ def user_info(request):
 
     return {}
 
+def notification(request):
+    if notification in request.session:
+        notif=request.session['notification']
+        return {'notification':notif}
+    return {}

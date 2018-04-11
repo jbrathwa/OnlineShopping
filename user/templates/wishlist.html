@@ -9,20 +9,20 @@
 
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-6"><b>Item</b></div>
-                    <div class="col-md-2"><b>Price</b></div>
-                    <div class="col-md-2"><b>Add to cart</b></div>
-                    <div class="col-md-2"><b>Remove</b></div>
+                    <div class="col-sm-6"><b>Item</b></div>
+                    <div class="col-sm-2"><b>Price</b></div>
+                    <div class="col-sm-2"><b>Add to cart</b></div>
+                    <div class="col-sm-2"><b>Remove</b></div>
                 </div>
                 <br>
                 {% for product in products %}
                 <div id="{{product.pk}}" class="row">
-                     <div class="col-md-6">
+                     <div class="col-sm-6">
                       <p>{{product.product_name}}</p>
                      </div>
                      <div id="price" class="col-md-2">{{product.price}}</div>
-                    <div class="col-md-2"><button id="wish{{product.pk}}" type="button" class="btn btn-xs btn-link" onclick="cart(this,event)"><i class="material-icons">shopping_cart</i></button></div>
-                    <div class="col-md-2"><button type="button" class="btn btn-xs btn-link" onclick="removeFromWishlist(this)"><i class="material-icons">clear</i></button></div>
+                    <div class="col-sm-2"><button id="wish{{product.pk}}" type="button" class="btn btn-xs btn-link" onclick="cart(this,event)"><i class="material-icons">shopping_cart</i></button></div>
+                    <div class="col-sm-2"><button type="button" class="btn btn-xs btn-link" onclick="removeFromWishlist(this)"><i class="material-icons">clear</i></button></div>
                       <input type="hidden" id="product" name="{{product.pk}}" value="{{product.pk}}">
                 </div>
                 <br>
